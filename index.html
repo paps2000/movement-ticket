@@ -79,7 +79,10 @@
     border:1px solid rgba(255,255,255,.08);
   }
   .brand{display:flex;align-items:center;gap:16px;font-weight:900;letter-spacing:.5px}
-  .rexona-logo{height:34px;width:auto;display:block}
+  .rexona-logo{
+    height:42px;width:auto;display:block;
+    filter:brightness(0) invert(1) drop-shadow(0 0 12px rgba(127,252,240,.25));
+  }
   .brand .sep{
     width:1px;height:28px;background:rgba(255,255,255,.15)
   }
@@ -211,6 +214,96 @@
     font-size:13px;color:#d9f4f0
   }
   .goal b{color:#fff}
+
+  /* Live badge + animations */
+  .live-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 14px;border-radius:999px;
+    background:linear-gradient(135deg,#ff2a78,#ff2d2d);
+    font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:900;
+    box-shadow:0 0 0 0 rgba(255,42,120,.7);
+    animation:liveBox 1.8s ease-out infinite;
+    position:relative;
+  }
+  .live-badge .pulse{
+    width:9px;height:9px;border-radius:50%;background:#fff;
+    box-shadow:0 0 0 0 rgba(255,255,255,.7);
+    animation:livePulse 1.4s ease-out infinite;
+  }
+  @keyframes livePulse{
+    0%  {box-shadow:0 0 0 0 rgba(255,255,255,.9)}
+    70% {box-shadow:0 0 0 12px rgba(255,255,255,0)}
+    100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+  }
+  @keyframes liveBox{
+    0%  {box-shadow:0 0 0 0 rgba(255,42,120,.55)}
+    70% {box-shadow:0 0 0 18px rgba(255,42,120,0)}
+    100%{box-shadow:0 0 0 0 rgba(255,42,120,0)}
+  }
+
+  /* Scanline sweep on screens */
+  @keyframes sweep{
+    0%  {transform:translateY(-100%)}
+    100%{transform:translateY(200%)}
+  }
+  .seg .sweep{
+    position:absolute;left:0;right:0;height:30%;z-index:5;pointer-events:none;
+    background:linear-gradient(180deg, transparent, rgba(127,252,240,.10), transparent);
+    animation:sweep 4s linear infinite;
+  }
+  .seg:nth-child(2) .sweep{animation-delay:.6s}
+  .seg:nth-child(3) .sweep{animation-delay:1.2s}
+  .seg:nth-child(4) .sweep{animation-delay:1.8s}
+
+  /* Digit flip */
+  .seg .n{transition:transform .12s ease, color .12s}
+  .seg .n.flip{
+    transform:translateY(-4px) scale(1.04);
+    color:#bdfff5;
+  }
+
+  /* Steps bar shimmer */
+  .bar > i{position:relative;overflow:hidden}
+  .bar > i::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+    transform:translateX(-100%);
+    animation:shimmer 2.6s linear infinite;
+  }
+  @keyframes shimmer{
+    0%  {transform:translateX(-100%)}
+    100%{transform:translateX(100%)}
+  }
+
+  /* Steps counter tick flash */
+  .steps.tick{
+    animation:tickFlash .35s ease-out;
+  }
+  @keyframes tickFlash{
+    0%  {color:#fff;text-shadow:0 0 8px #fff,0 0 24px rgba(127,252,240,1)}
+    100%{color:var(--led)}
+  }
+
+  /* Row entry stagger */
+  @keyframes rowIn{
+    from{opacity:0;transform:translateX(-12px)}
+    to  {opacity:1;transform:translateX(0)}
+  }
+  .row{animation:rowIn .5s ease-out both}
+
+  /* Ring breathing glow */
+  .ring{animation:ringBreathe 3.2s ease-in-out infinite}
+  @keyframes ringBreathe{
+    0%,100%{filter:drop-shadow(0 0 18px rgba(127,252,240,.25))}
+    50%    {filter:drop-shadow(0 0 38px rgba(127,252,240,.55))}
+  }
+
+  /* Hero gradient pan */
+  .hero{background-size:200% 200%;animation:heroPan 18s ease-in-out infinite}
+  @keyframes heroPan{
+    0%,100%{background-position:0% 0%}
+    50%    {background-position:100% 100%}
+  }
 
   /* Chains + restrictive */
   .chain-divider{
@@ -359,23 +452,18 @@
 
   <header class="top">
     <div class="brand">
-      <svg class="rexona-logo" viewBox="0 0 520 130" xmlns="http://www.w3.org/2000/svg" aria-label="Rexona">
-        <g fill="#ffffff">
-          <!-- Tick -->
-          <path d="M10 55 L50 95 L130 5 L115 5 L48 75 L25 55 Z"/>
-          <!-- Wordmark "Rexona" simplified -->
-          <text x="150" y="92" font-family="Inter, Arial, sans-serif" font-size="78" font-weight="900" letter-spacing="-2">Rexona</text>
-          <text x="498" y="40" font-size="18" font-weight="700">®</text>
-        </g>
-      </svg>
+      <img class="rexona-logo" src="assets/rexona-logo.png" alt="Rexona"/>
       <div class="sep"></div>
       <div class="title">The Movement<br><b>Ticket</b></div>
     </div>
-    <nav>
-      <a href="#leaderboard">Leaderboard</a>
-      <a href="#meta">Meta</a>
-      <a href="#equipo">Equipo</a>
-    </nav>
+    <div style="display:flex;align-items:center;gap:18px">
+      <span class="live-badge"><span class="pulse"></span> En vivo</span>
+      <nav>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#meta">Meta</a>
+        <a href="#equipo">Equipo</a>
+      </nav>
+    </div>
   </header>
 
   <section class="hero">
@@ -391,7 +479,7 @@
       <div class="stat"><div class="k">Pasos totales</div><div class="v" id="totalSteps">42,318</div></div>
       <div class="stat"><div class="k">Meta</div><div class="v">100,000</div></div>
       <div class="stat"><div class="k">Progreso</div><div class="v" id="totalPct">42<small>%</small></div></div>
-      <div class="stat"><div class="k">Último update</div><div class="v" style="font-size:18px">Hoy · 18:42</div></div>
+      <div class="stat"><div class="k">Último update</div><div class="v" id="lastUpdate" style="font-size:22px">--:--:--</div></div>
     </div>
   </section>
 
@@ -404,10 +492,10 @@
       </span>
       <h3>Sin pausa. Sin excusas. Cada paso cuenta para el pitazo inicial:</h3>
       <div class="timer">
-        <div class="seg"><div class="n" id="cdH">00</div><div class="u">Horas</div></div>
-        <div class="seg"><div class="n" id="cdM">00</div><div class="u">Minutos</div></div>
-        <div class="seg"><div class="n" id="cdS">00</div><div class="u">Segundos</div></div>
-        <div class="seg"><div class="n" id="cdMs">000</div><div class="u">Milisegundos</div></div>
+        <div class="seg"><span class="sweep"></span><div class="n" id="cdH">00</div><div class="u">Horas</div></div>
+        <div class="seg"><span class="sweep"></span><div class="n" id="cdM">00</div><div class="u">Minutos</div></div>
+        <div class="seg"><span class="sweep"></span><div class="n" id="cdS">00</div><div class="u">Segundos</div></div>
+        <div class="seg"><span class="sweep"></span><div class="n" id="cdMs">000</div><div class="u">Milisegundos</div></div>
       </div>
       <div class="hazard"></div>
     </div>
@@ -415,7 +503,7 @@
 
   <section class="countdown-soon" id="countdownSoon">
     <div>Contador se activa <b id="activateIn">—</b> antes del Mundial</div>
-    <div>Kickoff: <b id="kickoff">11 Jun 2026 · 19:00 CDMX</b></div>
+    <div>Kickoff: <b id="kickoff">11 Jun 2026 · 13:00 · Estadio Ciudad de México</b></div>
   </section>
 
   <div class="chain-divider">⛓ Equipo encadenado · No avanza uno si no avanzan todos ⛓</div>
@@ -473,7 +561,7 @@
     const cls = rank===1?'top1':rank===2?'top2':rank===3?'top3':'';
     const w = Math.round(c.steps / max * 100);
     rows.insertAdjacentHTML('beforeend', `
-      <div class="row ${cls}">
+      <div class="row ${cls}" style="animation-delay:${i*0.08}s">
         <div class="rank">${rank}</div>
         <div class="name">${c.name}<small>${c.handle}</small></div>
         <div class="steps">${c.steps.toLocaleString('es')}<small>PASOS</small></div>
@@ -491,7 +579,8 @@
   document.getElementById('avg').textContent = Math.round(total/creators.length).toLocaleString('es');
 
   // Countdown — FIFA 2026 opening match: 11 Jun 2026, 19:00 CDMX (UTC-6 = 01:00 UTC del 12 Jun)
-  const KICKOFF = new Date('2026-06-12T01:00:00Z');
+  // Kickoff: 11 Jun 2026, 13:00 CDMX (UTC-6) → 19:00 UTC. Estadio Ciudad de México.
+  const KICKOFF = new Date('2026-06-11T19:00:00Z');
   const ACTIVATION_HOURS = 72;
   const ACTIVATION_MS = ACTIVATION_HOURS * 3600 * 1000;
 
@@ -502,6 +591,14 @@
   const elS = document.getElementById('cdS');
   const elMs = document.getElementById('cdMs');
   const elAct = document.getElementById('activateIn');
+
+  function setSeg(el, v){
+    if(el.textContent === v) return;
+    el.textContent = v;
+    el.classList.remove('flip'); void el.offsetWidth;
+    el.classList.add('flip');
+    setTimeout(()=>el.classList.remove('flip'), 120);
+  }
 
   function fmtUntilActivation(ms){
     const days = Math.floor(ms / 86400000);
@@ -528,10 +625,10 @@
       const m  = Math.floor((diff % 3600000) / 60000);
       const s  = Math.floor((diff % 60000) / 1000);
       const ms = diff % 1000;
-      elH.textContent  = String(h).padStart(2,'0');
-      elM.textContent  = String(m).padStart(2,'0');
-      elS.textContent  = String(s).padStart(2,'0');
-      elMs.textContent = String(ms).padStart(3,'0');
+      setSeg(elH,  String(h).padStart(2,'0'));
+      setSeg(elM,  String(m).padStart(2,'0'));
+      setSeg(elS,  String(s).padStart(2,'0'));
+      setSeg(elMs, String(ms).padStart(3,'0'));
     } else {
       elCd.classList.remove('active');
       elSoon.style.display = 'flex';
@@ -540,6 +637,44 @@
     requestAnimationFrame(tick);
   }
   tick();
+
+  // Live "Último update" clock
+  function pad(n){return String(n).padStart(2,'0')}
+  function updateClock(){
+    const d = new Date();
+    document.getElementById('lastUpdate').textContent =
+      pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+  }
+  updateClock(); setInterval(updateClock, 1000);
+
+  // Live step jitter — simulate creators stepping in real time
+  const stepEls = [...document.querySelectorAll('.row')].map((row,i)=>({
+    row, i,
+    el: row.querySelector('.steps'),
+    bar: row.querySelector('.bar > i'),
+    val: sorted[i].steps
+  }));
+  function liveStep(){
+    const target = stepEls[Math.floor(Math.random()*stepEls.length)];
+    const inc = Math.floor(Math.random()*8)+1;
+    target.val += inc;
+    target.el.firstChild.nodeValue = target.val.toLocaleString('es');
+    target.el.classList.remove('tick'); void target.el.offsetWidth;
+    target.el.classList.add('tick');
+    // recompute totals
+    const newTotal = stepEls.reduce((s,x)=>s+x.val,0);
+    const newPct = Math.min(100, Math.round(newTotal/GOAL*100));
+    document.getElementById('totalSteps').textContent = newTotal.toLocaleString('es');
+    document.getElementById('totalPct').innerHTML = newPct+'<small>%</small>';
+    document.getElementById('ringPct').textContent = newPct;
+    document.getElementById('ring').style.setProperty('--p', newPct);
+    document.getElementById('left').textContent = (GOAL-newTotal).toLocaleString('es');
+    document.getElementById('avg').textContent = Math.round(newTotal/stepEls.length).toLocaleString('es');
+    // bars
+    const mx = Math.max(...stepEls.map(x=>x.val));
+    stepEls.forEach(x=>{ x.bar.style.width = (x.val/mx*100)+'%' });
+  }
+  setInterval(liveStep, 1800 + Math.random()*1400);
 </script>
 </body>
 </html>
