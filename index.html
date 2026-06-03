@@ -9,12 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Jersey+25&family=DotGothic16&display=swap" rel="stylesheet">
 <style>
   :root{
+    --deep:#031f21;
     --male-teal:#003c46;
     --female-teal:#7fd9cf;
     --accent-teal:#009a8e;
-    --electric-pink:#ff2a78;
-    --electric-red:#ff2d2d;
-    --electric-magenta:#d6219b;
+    --electric-green:#00ce38;
+    --electric-green-bright:#5cff8a;
+    --electric-cyan:#00e0c4;
     --white:#ffffff;
     --ink:#001a1f;
     --led:#7ffcf0;
@@ -53,11 +54,11 @@
     font-weight:400;
   }
   .led-text.pink{
-    color:#ff7ab8;
+    color:#5cff8a;
     text-shadow:
-      0 0 4px rgba(255,122,184,.9),
-      0 0 14px rgba(255,42,120,.6),
-      0 0 30px rgba(255,42,120,.4);
+      0 0 4px rgba(92,255,138,.9),
+      0 0 14px rgba(0,206,56,.6),
+      0 0 30px rgba(0,206,56,.4);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
@@ -67,7 +68,7 @@
     background:
       radial-gradient(1200px 700px at 10% 0%, rgba(0,163,148,.55) 0%, transparent 60%),
       radial-gradient(1000px 600px at 100% 100%, #000 0%, transparent 60%),
-      linear-gradient(160deg, #000 0%, #001014 35%, var(--male-teal) 70%, #000814 100%);
+      linear-gradient(160deg, #000 0%, var(--deep) 35%, var(--male-teal) 75%, #000814 100%);
     min-height:100vh;
     overflow-x:hidden;
   }
@@ -99,19 +100,19 @@
     margin-top:28px;padding:42px 40px;border-radius:28px;
     background:
       linear-gradient(135deg, rgba(0,0,0,.85) 0%, rgba(0,60,70,.85) 60%, rgba(0,154,142,.6) 100%),
-      radial-gradient(600px 300px at 90% 0%, rgba(255,42,120,.45), transparent 60%);
+      radial-gradient(600px 300px at 90% 0%, rgba(0,206,56,.45), transparent 60%);
     border:1px solid rgba(255,255,255,.1);
     position:relative;overflow:hidden;
   }
   .hero::before{
     content:"";position:absolute;inset:0;pointer-events:none;
     background:
-      repeating-linear-gradient(45deg, rgba(255,42,120,.08) 0 14px, transparent 14px 28px);
+      repeating-linear-gradient(45deg, rgba(0,206,56,.08) 0 14px, transparent 14px 28px);
     mix-blend-mode:overlay;opacity:.6;
   }
   .eyebrow{
     display:inline-block;padding:6px 12px;border-radius:999px;
-    background:linear-gradient(90deg,var(--electric-pink),var(--electric-red));
+    background:linear-gradient(90deg,var(--electric-green),var(--electric-cyan));
     font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
   }
   h1{
@@ -158,16 +159,16 @@
     padding:14px 12px;border-radius:14px;transition:.2s;
   }
   .row + .row{
-    border-top:1px dashed rgba(255,42,120,.18);
+    border-top:1px dashed rgba(0,206,56,.18);
   }
   .row:hover{background:rgba(255,255,255,.04)}
   .rank{
     width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
     font-weight:900;font-size:16px;background:rgba(255,255,255,.08);color:#cdeeea
   }
-  .row.top1 .rank{background:linear-gradient(135deg,var(--electric-pink),var(--electric-red));color:#fff}
+  .row.top1 .rank{background:linear-gradient(135deg,var(--electric-green),var(--electric-cyan));color:#fff}
   .row.top2 .rank{background:linear-gradient(135deg,var(--female-teal),var(--accent-teal));color:var(--ink)}
-  .row.top3 .rank{background:linear-gradient(135deg,#ffb86b,#ff6a3d);color:#fff}
+  .row.top3 .rank{background:linear-gradient(135deg,#00958f,#003c46);color:#fff}
   .name{font-weight:800;font-size:17px}
   .name small{display:block;font-size:12px;color:#9fd8d0;font-weight:500;margin-top:2px}
   .steps{
@@ -182,7 +183,7 @@
   }
   .bar > i{
     position:absolute;inset:0;display:block;border-radius:999px;
-    background:linear-gradient(90deg,var(--female-teal),var(--accent-teal),var(--electric-pink));
+    background:linear-gradient(90deg,var(--female-teal),var(--accent-teal),var(--electric-green));
   }
 
   .progress-card{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
@@ -191,8 +192,8 @@
     width:220px;height:220px;border-radius:50%;
     background:
       conic-gradient(
-        var(--electric-pink) 0%,
-        var(--electric-red) calc(var(--p)*1%),
+        var(--electric-green) 0%,
+        var(--electric-cyan) calc(var(--p)*1%),
         rgba(255,255,255,.08) calc(var(--p)*1%) 100%
       );
     display:grid;place-items:center;position:relative;
@@ -219,9 +220,9 @@
   .live-badge{
     display:inline-flex;align-items:center;gap:8px;
     padding:7px 14px;border-radius:999px;
-    background:linear-gradient(135deg,#ff2a78,#ff2d2d);
+    background:linear-gradient(135deg,#00ce38,#00e0c4);
     font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:900;
-    box-shadow:0 0 0 0 rgba(255,42,120,.7);
+    box-shadow:0 0 0 0 rgba(0,206,56,.7);
     animation:liveBox 1.8s ease-out infinite;
     position:relative;
   }
@@ -236,9 +237,9 @@
     100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
   }
   @keyframes liveBox{
-    0%  {box-shadow:0 0 0 0 rgba(255,42,120,.55)}
-    70% {box-shadow:0 0 0 18px rgba(255,42,120,0)}
-    100%{box-shadow:0 0 0 0 rgba(255,42,120,0)}
+    0%  {box-shadow:0 0 0 0 rgba(0,206,56,.55)}
+    70% {box-shadow:0 0 0 18px rgba(0,206,56,0)}
+    100%{box-shadow:0 0 0 0 rgba(0,206,56,0)}
   }
 
   /* Scanline sweep on screens */
@@ -308,7 +309,7 @@
   /* Chains + restrictive */
   .chain-divider{
     display:flex;align-items:center;gap:10px;margin:22px 0 -4px;
-    color:#ff2a78;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:800;
+    color:#00ce38;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:800;
   }
   .chain-divider::before,.chain-divider::after{
     content:"";flex:1;height:14px;
@@ -317,14 +318,14 @@
   }
   .hazard{
     height:6px;border-radius:3px;margin:14px 0 0;
-    background:repeating-linear-gradient(45deg,#000 0 12px,#ff2a78 12px 24px);
+    background:repeating-linear-gradient(45deg,#000 0 12px,#00ce38 12px 24px);
     opacity:.85;
   }
   .lock-pill{
     display:inline-flex;align-items:center;gap:6px;
     padding:5px 10px;border-radius:999px;
-    background:rgba(0,0,0,.6);border:1px solid rgba(255,42,120,.4);
-    font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:800;color:#ff2a78;
+    background:rgba(0,0,0,.6);border:1px solid rgba(0,206,56,.4);
+    font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:800;color:#00ce38;
     margin-left:10px;
   }
   .lock-pill svg{width:11px;height:11px}
@@ -339,19 +340,19 @@
     margin-top:22px;border-radius:24px;padding:26px 28px;
     background:
       linear-gradient(135deg,#000 0%,#0a0a0a 55%,#001a1f 100%);
-    border:2px solid rgba(255,42,120,.5);
+    border:2px solid rgba(0,206,56,.5);
     position:relative;overflow:hidden;
     display:none;
   }
   .countdown::before,.countdown::after{
     content:"";position:absolute;left:0;right:0;height:8px;
-    background:repeating-linear-gradient(45deg,#000 0 10px,#ff2a78 10px 20px);
+    background:repeating-linear-gradient(45deg,#000 0 10px,#00ce38 10px 20px);
   }
   .countdown::before{top:0}
   .countdown::after{bottom:0}
   .countdown .inner{padding:14px 4px 12px}
   .corner{
-    position:absolute;width:22px;height:22px;border:2px solid #ff2a78;
+    position:absolute;width:22px;height:22px;border:2px solid #00ce38;
   }
   .corner.tl{top:14px;left:14px;border-right:none;border-bottom:none}
   .corner.tr{top:14px;right:14px;border-left:none;border-bottom:none}
@@ -359,16 +360,16 @@
   .corner.br{bottom:14px;right:14px;border-left:none;border-top:none}
   .countdown.active{display:block;animation:pulseGlow 2.4s ease-in-out infinite}
   @keyframes pulseGlow{
-    0%,100%{box-shadow:0 0 0 0 rgba(255,42,120,.0)}
-    50%{box-shadow:0 0 60px -5px rgba(255,42,120,.55)}
+    0%,100%{box-shadow:0 0 0 0 rgba(0,206,56,.0)}
+    50%{box-shadow:0 0 60px -5px rgba(0,206,56,.55)}
   }
   .countdown .label{
     display:inline-flex;align-items:center;gap:8px;
     font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:800;
-    color:#ff2a78;
+    color:#00ce38;
   }
   .countdown .label .dot{
-    width:8px;height:8px;border-radius:50%;background:#ff2a78;
+    width:8px;height:8px;border-radius:50%;background:#00ce38;
     animation:blink 1s steps(2) infinite;
   }
   @keyframes blink{50%{opacity:.2}}
